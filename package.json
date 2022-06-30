@@ -4,15 +4,15 @@
     "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
-  "version": "1.0.11",
-  "description": "A minimal boilerplate for the essential files Gatsby looks for in a plugin",
+  "version": "1.0.12",
+  "description": "A wrapper component for the GatsbyImage component that interfaces with images returned from Strapi v4's api.",
   "main": "index.jsx",
   "typings": "index",
   "keywords": [
     "gatsby",
     "gatsby-plugin"
   ],
-  "author": "Kyle Gill <kyle.robert.gill@gmail.com>",
+  "author": "Sean Davis <sean.davis1289@gmail.com",
   "license": "0BSD",
   "dependencies": {},
   "devDependencies": {
