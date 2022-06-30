@@ -5,8 +5,9 @@ import {
   GatsbyImageProps,
 } from "gatsby-plugin-image";
 
-export interface StrapiImageProps extends Omit<GatsbyImageProps, "image"> {
-  image: StrapiImageData;
+export interface StrapiImageProps
+  extends Omit<GatsbyImageProps, "image" | "alt"> {
+  image: StrapiImageApiResponse;
   layout?: string;
   width?: number;
   height?: string;
@@ -14,15 +15,19 @@ export interface StrapiImageProps extends Omit<GatsbyImageProps, "image"> {
 }
 
 export interface StrapiImageData {
-  data: {
-    url: string;
-    formats: StrapiFormats;
-  };
-  alt: string;
+  url: string;
+  formats: StrapiFormats;
+  alternativeText: string;
   height: number;
   width: number;
+  name: string;
 }
 
+export interface StrapiImageApiResponse {
+  data: {
+    attributes: StrapiImageData;
+  };
+}
 export interface StrapiFormats {
   large: StrapiFormat;
   medium: StrapiFormat;
@@ -48,9 +53,9 @@ function urlBuilder({ baseUrl, width, height, format, options }: any) {
 
 export function getExampleImageData({ image, ...props }: any) {
   return getImageData({
-    baseUrl: image.data,
-    sourceWidth: image.width,
-    sourceHeight: image.height,
+    baseUrl: image.data.attributes,
+    sourceWidth: image.data.attributes.width,
+    sourceHeight: image.data.attributes.height,
     urlBuilder,
     pluginName: "gatsby-source-example",
     formats: ["auto"],
@@ -77,7 +82,11 @@ export const StrapiImage = ({
   console.log("local imageData", imageData);
   return (
     <>
-      <GatsbyImage image={imageData} {...props} />
+      <GatsbyImage
+        image={imageData}
+        alt={image.data.attributes.alternativeText}
+        {...props}
+      />
     </>
   );
 };

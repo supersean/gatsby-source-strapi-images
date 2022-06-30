@@ -4,7 +4,7 @@
     "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
-  "version": "1.0.5",
+  "version": "1.0.11",
   "description": "A minimal boilerplate for the essential files Gatsby looks for in a plugin",
   "main": "index.jsx",
   "typings": "index",
