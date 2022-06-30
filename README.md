@@ -31,6 +31,10 @@ module.exports = {
 3. Use the component
 
 ```javascript
+import {
+  StrapiImage,
+  StrapiImageApiResponse,
+} from "@seansly/gatsby-source-strapi-images";
 interface SSRPageProps {
   data: {
     attributes: {
