@@ -28,6 +28,30 @@ module.exports = {
 };
 ```
 
+3. Define a urlBuilder function, you would create this based on what media options are in your strapi configuration.
+
+```javascript
+export default function urlBuilder({
+  baseUrl,
+  width,
+  height,
+  format,
+  options,
+}: any) {
+  let formats = baseUrl.formats;
+  console.log(baseUrl, width);
+  if (width > 2000 || width == baseUrl.width) {
+    return baseUrl.url;
+  } else if (formats.large && width > 750) {
+    return formats.large.url;
+  } else if (formats.medium && width > 500) {
+    return formats.medium.url;
+  } else {
+    return formats.small.url;
+  }
+}
+```
+
 3. Use the component
 
 ```javascript

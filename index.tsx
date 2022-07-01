@@ -11,7 +11,8 @@ export interface StrapiImageProps
   layout?: string;
   width?: number;
   height?: string;
-  breakpoints?: [number];
+  breakpoints?: number[];
+  urlBuilder: any;
 }
 
 export interface StrapiImageData {
@@ -39,24 +40,12 @@ export interface StrapiFormat {
   width: number;
 }
 
-function urlBuilder({ baseUrl, width, height, format, options }: any) {
-  if (width < 501 && baseUrl.formats.small) {
-    return baseUrl.formats.small.url;
-  } else if (width < 701 && baseUrl.formats.medium) {
-    return baseUrl.formats.medium.url;
-  } else if (width < 1001 && baseUrl.formats.large) {
-    return baseUrl.formats.large.url;
-  } else {
-    return baseUrl.url;
-  }
-}
-
-export function getExampleImageData({ image, ...props }: any) {
+export function getExampleImageData({ image, urlBuilder, ...props }: any) {
   return getImageData({
     baseUrl: image.data.attributes,
     sourceWidth: image.data.attributes.width,
     sourceHeight: image.data.attributes.height,
-    urlBuilder,
+    urlBuilder: urlBuilder,
     pluginName: "gatsby-source-example",
     formats: ["auto"],
     ...props,
@@ -65,21 +54,23 @@ export function getExampleImageData({ image, ...props }: any) {
 
 export const StrapiImage = ({
   image,
-  layout,
+  layout = `constrained`,
   width,
   height,
-  breakpoints,
+  breakpoints = [500, 750, 1000, 1250, 1500, 1750, 2000],
+  urlBuilder,
   ...props
 }: StrapiImageProps) => {
   const imageData = getExampleImageData({
     image,
     width,
     height,
-    breakpoints: [500, 700, 1000],
-    layout: `constrained`,
+    breakpoints,
+    layout,
+    urlBuilder,
     ...props,
   });
-  console.log("local imageData", imageData);
+
   return (
     <>
       <GatsbyImage
