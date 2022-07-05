@@ -24,6 +24,12 @@ export interface StrapiImageData {
   name: string;
 }
 
+export interface StrapiImageListApiResponse {
+  data: {
+    attributes: StrapiImageData;
+  }[];
+}
+
 export interface StrapiImageApiResponse {
   data: {
     attributes: StrapiImageData;
