@@ -75,8 +75,8 @@ export const StrapiImage = ({
   ...props
 }: StrapiImageProps) => {
   var imageObj;
-  if (!image.data) {
-    imageObj = { data: { attributes: image } };
+  if (image.attributes) {
+    imageObj = { data: image };
   } else {
     imageObj = image;
   }
