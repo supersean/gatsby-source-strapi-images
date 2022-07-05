@@ -7,7 +7,7 @@ import {
 
 export interface StrapiImageProps
   extends Omit<GatsbyImageProps, "image" | "alt"> {
-  image: StrapiImageApiResponse;
+  image: StrapiApiResponse;
   layout?: string;
   width?: number;
   height?: string;
@@ -22,6 +22,13 @@ export interface StrapiImageData {
   height: number;
   width: number;
   name: string;
+}
+
+interface StrapiApiResponse {
+  data?: {
+    attributes: StrapiImageData;
+  };
+  attributes?: StrapiImageData;
 }
 
 export interface StrapiImageListApiResponse {
@@ -67,8 +74,15 @@ export const StrapiImage = ({
   urlBuilder,
   ...props
 }: StrapiImageProps) => {
+  var imageObj;
+  if (!image.data) {
+    imageObj = { data: { attributes: image } };
+  } else {
+    imageObj = image;
+  }
+
   const imageData = getExampleImageData({
-    image,
+    image: imageObj,
     width,
     height,
     breakpoints,
@@ -81,7 +95,7 @@ export const StrapiImage = ({
     <>
       <GatsbyImage
         image={imageData}
-        alt={image.data.attributes.alternativeText}
+        alt={imageObj.data.attributes.alternativeText}
         {...props}
       />
     </>
