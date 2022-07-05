@@ -4,7 +4,7 @@
     "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
-  "version": "1.0.22",
+  "version": "1.0.24",
   "description": "A wrapper component for the GatsbyImage component that interfaces with images returned from Strapi v4's api.",
   "main": "index.jsx",
   "typings": "index",

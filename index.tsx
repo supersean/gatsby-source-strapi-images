@@ -13,6 +13,7 @@ export interface StrapiImageProps
   height?: string;
   breakpoints?: number[];
   urlBuilder: any;
+  aspectRatio?: number;
 }
 
 export interface StrapiImageData {
