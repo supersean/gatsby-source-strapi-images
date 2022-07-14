@@ -6,9 +6,7 @@ Ideal for SSR since this image does not get processed by image-sharp
 
 ## 🚀 Quick start
 
-Add the plugin
-
-1. Initialize a new plugin from the starter with `gatsby new`
+1. Add the plugin
 
 ```shell
 yarn add @seansly/gatsby-source-strapi-images
@@ -16,7 +14,7 @@ yarn add @seansly/gatsby-source-strapi-images
 
 2. Include the plugin in a Gatsby site
 
-Inside of the `gatsby-config.js` file of your site (in this case, `my-gatsby-site`), include the plugin in the `plugins` array:
+Inside of the `gatsby-config.js` file of your site, include the plugin in the `plugins` array:
 
 ```javascript
 module.exports = {
