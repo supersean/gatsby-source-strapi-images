@@ -80,3 +80,6 @@ const SSRPage = ({serverData}) => {
     </>);
 };
 ```
+
+
+Currently don't have a way to pass strapi image sizes into the plugin, so the urlBuilder must be created outside the plugin.
