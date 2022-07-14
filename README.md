@@ -74,7 +74,7 @@ const SSRPage = ({serverData}) => {
       <StrapiImage image={Image} urlBuilder={urlBuilder} />
       {ImageList && ImageList.data.map((image, i) => {
         return (
-          <StrapiImage image={image} />
+          <StrapiImage image={image} urlBuilder={urlBuilder} />
          );
        })};
     </>);
@@ -82,4 +82,28 @@ const SSRPage = ({serverData}) => {
 ```
 
 
-Currently don't have a way to pass strapi image sizes into the plugin, so the urlBuilder must be created outside the plugin.
+Currently don't have a way to pass strapi image sizes into the plugin, so the urlBuilder must be created outside the plugin.  But you can wrap this component with your own that passes the same urlBuilder every time.
+
+
+```javascript
+import { StrapiImageApiResponse } from "@seansly/gatsby-source-strapi-images";
+import * as React from "react";
+import {
+  StrapiImage as SeanslyStrapiImage,
+  StrapiImageProps as SeanslyStrapiImageProps,
+} from "@seansly/gatsby-source-strapi-images";
+import { urlBuilder as builder } from "../util/urlBuilder";
+
+interface StrapiImageProps extends Omit<SeanslyStrapiImageProps, "urlBuilder"> {
+  urlBuilder?: any;
+}
+
+export const StrapiImage = ({ urlBuilder, ...props }: StrapiImageProps) => {
+  if (!urlBuilder) {
+    urlBuilder = builder;
+  }
+  return (
+    <SeanslyStrapiImage urlBuilder={urlBuilder} {...props}></SeanslyStrapiImage>
+  );
+};
+```
