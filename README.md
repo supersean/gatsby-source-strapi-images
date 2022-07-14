@@ -58,20 +58,25 @@ export default function urlBuilder({
 import {
   StrapiImage,
   StrapiImageApiResponse,
+  StrapiImageListApiResponse
 } from "@seansly/gatsby-source-strapi-images";
+import { urlBuilder } from "./urlBuilder";
+
 interface SSRPageProps {
-  data: {
-    attributes: {
-      Image: StrapiImageApiResponse,
-    },
-  };
+  Image: StrapiImageApiResponse;
+  ImageList: StrapiImageListApiResponse;
 }
 
-const SSRPage = ({
-  data: {
-    attributes: { Image },
-  },
-}: SSRPageProps) => {
-  return <StrapiImage image={Image} />;
+const SSRPage = ({serverData}) => {
+  
+  return (
+    <>
+      <StrapiImage image={Image} urlBuilder={urlBuilder} />
+      {ImageList && ImageList.data.map((image, i) => {
+        return (
+          <StrapiImage image={image} />
+         );
+       })};
+    </>);
 };
 ```
